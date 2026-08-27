@@ -2,7 +2,7 @@ import os
 import requests
 from app.core.config import settings
 
-def search_pois(keyword: str, city: str, types: str = "110000") -> list:
+def search_pois(keyword: str, city: str, types: str = "") -> list:
     """
     调用高德 POI 搜索接口，获取景点列表
     types: 110000 代表风景名胜（含公园、古镇等）

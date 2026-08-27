@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from app.services.llm_service import llm_service
 from app.agents.attraction_agent import recommend_attractions
+from app.graph.workflow import build_trip_graph
 
 router = APIRouter()
 
@@ -31,3 +32,37 @@ def recommend(data: RecommendRequest):
 @router.get("/")
 def hello():
     return {"msg": "旅游规划师启动成功"}
+
+
+class PlanTripRequest(BaseModel):
+    destination: str
+    preferences: str = "不限"
+
+
+@router.post("/plan-trip")
+def plan_trip(data: PlanTripRequest):
+    """
+    多智能体协作行程规划接口
+    顺序执行：景点推荐 → 酒店推荐 → 行程编译
+    """
+    try:
+        graph = build_trip_graph()
+        initial_state = {
+            "destination": data.destination,
+            "preferences": data.preferences,
+            "attractions": None,
+            "hotels": None,
+            "final_plan": None
+        }
+        final_state = graph.invoke(initial_state)
+        return {
+            "destination": data.destination,
+            "preferences": data.preferences,
+            "attractions": final_state.get("attractions"),
+            "hotels": final_state.get("hotels"),
+            "final_plan": final_state.get("final_plan")
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))

@@ -1,8 +1,18 @@
-### 测试景点推荐接口
-POST http://127.0.0.1:8000/api/v1/recommend-attractions
+##阶段二
+# ### 测试景点推荐接口
+# POST http://127.0.0.1:8000/api/v1/recommend-attractions
+# Content-Type: application/json
+
+# {
+#     "destination": "重庆",
+#     "preferences": "喜欢热闹的地方"
+# }
+
+### 阶段三：多智能体协作行程规划
+POST http://127.0.0.1:8000/api/v1/plan-trip
 Content-Type: application/json
 
 {
-    "destination": "厦门",
-    "preferences": "喜欢文艺小清新"
+    "destination": "福州",
+    "preferences": "喜欢热闹的夜市和火锅"
 }
