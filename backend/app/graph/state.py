@@ -5,10 +5,11 @@ class TripState(TypedDict):
     # 用户输入
     destination: str
     preferences: str
-    
+    include_hotel: bool  # 新增：是否包含酒店推荐（默认 True）
+
     # Agent 中间结果
-    attractions: Optional[Dict]   # 景点推荐结果
-    hotels: Optional[Dict]        # 酒店推荐结果
-    
+    attractions: Optional[Dict]
+    hotels: Optional[Dict]
+
     # 最终输出
-    final_plan: Optional[str]     # 编译后的完整行程文本
+    final_plan: Optional[str]

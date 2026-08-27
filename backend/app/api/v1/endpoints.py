@@ -37,19 +37,17 @@ def hello():
 class PlanTripRequest(BaseModel):
     destination: str
     preferences: str = "不限"
+    include_hotel: bool = True  # 新增：默认包含酒店
 
 
 @router.post("/plan-trip")
 def plan_trip(data: PlanTripRequest):
-    """
-    多智能体协作行程规划接口
-    顺序执行：景点推荐 → 酒店推荐 → 行程编译
-    """
     try:
         graph = build_trip_graph()
         initial_state = {
             "destination": data.destination,
             "preferences": data.preferences,
+            "include_hotel": data.include_hotel,  # 传入开关
             "attractions": None,
             "hotels": None,
             "final_plan": None

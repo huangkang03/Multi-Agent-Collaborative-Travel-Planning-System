@@ -16,3 +16,14 @@ Content-Type: application/json
     "destination": "福州",
     "preferences": "喜欢热闹的夜市和火锅"
 }
+
+
+### 阶段四测试（包含酒店）
+POST http://127.0.0.1:8000/api/v1/plan-trip
+Content-Type: application/json
+
+{
+    "destination": "厦门",
+    "preferences": "文艺小清新",
+    "include_hotel": false
+}
