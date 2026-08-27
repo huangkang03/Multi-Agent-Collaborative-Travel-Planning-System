@@ -9,5 +9,6 @@ class Settings:
     MODEL_NAME: str = os.getenv("MODEL_NAME", "deepseek-chat")
     HOST: str = os.getenv("HOST", "127.0.0.1")
     PORT: int = int(os.getenv("PORT", "8000"))
+    AMAP_API_KEY: str = os.getenv("AMAP_API_KEY", "") 
 
 settings = Settings()

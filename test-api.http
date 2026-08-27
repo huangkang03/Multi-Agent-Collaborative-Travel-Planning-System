@@ -1,0 +1,8 @@
+### 测试景点推荐接口
+POST http://127.0.0.1:8000/api/v1/recommend-attractions
+Content-Type: application/json
+
+{
+    "destination": "厦门",
+    "preferences": "喜欢文艺小清新"
+}
